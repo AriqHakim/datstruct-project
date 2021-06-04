@@ -50,10 +50,12 @@ namespace Graph
         return biggest;
     }
 
-    bool isColored(graph head){
+    bool isColored(graph head)
+    {
         for_each(head.adjacencyList, [](const pNode &p)
                  {
-                     if(p->data.color == 7){
+                     if (p->data.color == 7)
+                     {
                          return false;
                      }
                  });
@@ -73,9 +75,12 @@ namespace Graph
                          p->data.color = firstColor;
                      }
                  });
-        if(isColored(head)){
+        if (isColored(head))
+        {
             return;
-        } else {
+        }
+        else
+        {
             colorIt(head, firstColor);
         }
     }
