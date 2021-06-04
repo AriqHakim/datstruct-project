@@ -1,11 +1,13 @@
 #pragma once
 #include <string>
+#include <windows.h>
 
 struct Guru
 {
     std::string kode;
     std::string nama;
     char status[5];
+    int color;
 };
 
 void inisiasiStatus(char arr[5])
@@ -14,11 +16,19 @@ void inisiasiStatus(char arr[5])
     arr = init;
 }
 
+void changeColor(int color)
+{
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), color);
+}
+
+int inisiasiWarna() { return 7; }
+
 struct Node
 {
     Guru data;
     Node *edge;
     Node *next;
+    int totaledge;
 };
 typedef Node *pNode;
 
@@ -28,6 +38,7 @@ pNode createNode(Guru data)
     newNode->data = data;
     newNode->edge = nullptr;
     newNode->next = nullptr;
+    newNode->totaledge = 0;
     return newNode;
 }
 
@@ -65,10 +76,13 @@ pNode searchByKode(pNode head, std::string target)
     return nullptr;
 }
 
-template <typename F> void for_each (pNode head, F func){
+template <typename F>
+void for_each(pNode head, F func)
+{
     pNode curr = head;
-    while (curr != nullptr){
-        func(curr -> data);
-        curr = curr -> next;
+    while (curr != nullptr)
+    {
+        func(curr->data);
+        curr = curr->next;
     }
 }
