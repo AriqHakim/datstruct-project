@@ -1,10 +1,10 @@
-#include "util/graph.cpp"
+//#include "util/graph.cpp"
 #include <iostream>
 #include <iomanip>
 
 int main()
 {
-    Hari::pDayNode jadwal = Hari::inisiasiHari();
+    //Hari::pDayNode jadwal = Hari::inisiasiHari();
     int menu;
     std::string nama;
     float kode;
@@ -24,7 +24,7 @@ int main()
         switch (menu)
         {
         case 1:
-        balikcase1:
+        balikmenu1:
             system("cls");
             std::cout << "[Input Jadwal]\n\n";
             std::cout << "[Identitas Guru]" << std::endl;
@@ -65,7 +65,7 @@ int main()
                 goto mainmenu;
                 break;
             }
-        reconfirm:
+            reconfirm:
             std::cout << "Input hari lain (y/n)\t: ";
             std::cin >> confirm;
             if (confirm == 'n' || confirm == 'N')
@@ -74,7 +74,7 @@ int main()
             }
             else if (confirm == 'y' || confirm == 'Y')
             {
-                goto balikcase1;
+                goto balikmenu1;
             }
             else
             {
@@ -83,9 +83,19 @@ int main()
             break;
         case 2:
             system("cls");
-            std::cout << "[Lihat Jadwal]" << std::endl;
+            std::cout << "[Lihat Jadwal]\n\n";
+            std::cout << "[Tabel Jadwal]\n";
+            std::cout << "| " << std::setw(3) << std::setfill(' ')<<std::left << "No"
+                      << "| " << std::setw(15) <<std::setfill(' ') << std::left << "Nama"
+                      << "| " << std::setw(15) <<std::setfill(' ') << std::left << "Kode Mapel"
+                      << "| " << std::setw(7) <<std::setfill(' ') << std::left << "Senin"
+                      << "| " << std::setw(7) <<std::setfill(' ') << std::left << "Selasa"
+                      << "| " << std::setw(7) <<std::setfill(' ') << std::left << "Rabu"
+                      << "| " << std::setw(7) <<std::setfill(' ') << std::left << "Kamis"
+                      << "| " << std::setw(7) <<std::setfill(' ') << std::left << "Jumat" << "| ";
             break;
         case 3:
+
             system("cls");
             std::cout << "[Hapus Jadwal]" << std::endl;
             break;
