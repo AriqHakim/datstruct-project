@@ -6,8 +6,9 @@ int main()
 {
     //Hari::pDayNode jadwal = Hari::inisiasiHari();
     int menu;
+    int count = 0;
     std::string nama;
-    float kode;
+    std::string kode;
     int day;
     char confirm;
     do
@@ -26,7 +27,9 @@ int main()
         case 1:
         balikmenu1:
             system("cls");
+            count = count + 1;
             std::cout << "[Input Jadwal]\n\n";
+            std::cout << "Input ke-" << count <<std::endl;
             std::cout << "[Identitas Guru]" << std::endl;
             std::cout << "Nama\t\t: ";
             std::cin >> nama;
@@ -38,7 +41,7 @@ int main()
             std::cout << "1. Senin\n2. Selasa\n3. Rabu\n4. Kamis\n5. Jumat\n6. Kembali" << std::endl;
             std::cout << "Pilihan\t: ";
             std::cin >> day;
-            std::cout << "\n\n";
+            std::cout << "\n";
 
             switch (day)
             {
@@ -58,19 +61,21 @@ int main()
                 //isi
                 break;
             case 6:
-                std::cout << "Kembali ke menu utama\n"
-                          << std::endl;
+                std::cout << "Kembali ke menu utama\n";
+                count = count - 1;
                 system("pause");
                 system("cls");
                 goto mainmenu;
                 break;
             }
             reconfirm:
-            std::cout << "Input hari lain (y/n)\t: ";
+            std::cout << "Input hari/guru lain (y/n)\t: ";
             std::cin >> confirm;
             if (confirm == 'n' || confirm == 'N')
             {
-                return 0;
+                system("pause");
+                system("cls");
+                goto mainmenu;
             }
             else if (confirm == 'y' || confirm == 'Y')
             {
@@ -82,6 +87,7 @@ int main()
             }
             break;
         case 2:
+
             system("cls");
             std::cout << "[Lihat Jadwal]\n\n";
             std::cout << "[Tabel Jadwal]\n";
@@ -92,7 +98,11 @@ int main()
                       << "| " << std::setw(7) <<std::setfill(' ') << std::left << "Selasa"
                       << "| " << std::setw(7) <<std::setfill(' ') << std::left << "Rabu"
                       << "| " << std::setw(7) <<std::setfill(' ') << std::left << "Kamis"
-                      << "| " << std::setw(7) <<std::setfill(' ') << std::left << "Jumat" << "| ";
+                      << "| " << std::setw(7) <<std::setfill(' ') << std::left << "Jumat" << "| \n";
+            
+            system("pause");
+            system("cls");
+            goto mainmenu;
             break;
         case 3:
 
