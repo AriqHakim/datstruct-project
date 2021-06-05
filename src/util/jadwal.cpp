@@ -1,4 +1,4 @@
-#pragma once
+// #pragma once
 #include "../model/guru.cpp"
 
 namespace Hari
@@ -85,7 +85,7 @@ namespace Hari
     template <typename F> void for_each (pDayNode head, F func){
         pDayNode curr = head;
         while (curr != nullptr){
-            func(curr -> data);
+            func(curr);
             curr = curr -> next;
         }
     }

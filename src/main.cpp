@@ -1,10 +1,10 @@
-//#include "util/graph.cpp"
+#include "util/graph.cpp"
 #include <iostream>
 #include <iomanip>
 
 int main()
 {
-    //Hari::pDayNode jadwal = Hari::inisiasiHari();
+    Hari::pDayNode jadwal = Hari::inisiasiHari();
     int menu;
     std::string nama;
     float kode;

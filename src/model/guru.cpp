@@ -1,4 +1,4 @@
-#pragma once
+// #pragma once
 #include <string>
 #include <windows.h>
 
@@ -82,7 +82,7 @@ void for_each(pNode head, F func)
     pNode curr = head;
     while (curr != nullptr)
     {
-        func(curr->data);
+        func(curr);
         curr = curr->next;
     }
 }
