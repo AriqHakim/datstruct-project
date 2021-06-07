@@ -1,10 +1,10 @@
-#include "util/graph.cpp"
+//#include "util/graph.cpp"
 #include <iostream>
 #include <iomanip>
 
 int main()
 {
-    Hari::pDayNode jadwal = Hari::inisiasiHari();
+    //Hari::pDayNode jadwal = Hari::inisiasiHari();
     int menu;
     int count = 0;
     std::string nama;
@@ -15,9 +15,9 @@ int main()
     {
 
     mainmenu:
-        std::cout << "Welsch-Powell algorithm implementation" << std::endl;
+        std::cout << "Program Tabel Jadwal Guru" << std::endl;
 
-        std::cout << "1. Input Jadwal\n2. Lihat Jadwal\n3. Hapus Jadwal\n4. Exit\n"
+        std::cout << "1. Input Jadwal\n2. Lihat Jadwal\n3. Exit\n"
                   << std::endl;
         std::cout << "Pilihan : ";
         std::cin >> menu;
@@ -67,12 +67,19 @@ int main()
                 system("cls");
                 goto mainmenu;
                 break;
+            default:
+                count = count - 1;
+                std::cout << "Input Invalid...\n" << std::endl;
+                system("pause");
+                system("cls");
+                goto balikmenu1;
             }
             reconfirm:
             std::cout << "Input hari/guru lain (y/n)\t: ";
             std::cin >> confirm;
             if (confirm == 'n' || confirm == 'N')
             {
+                std::cout << "Kembali ke menu utama\n";
                 system("pause");
                 system("cls");
                 goto mainmenu;
@@ -105,16 +112,12 @@ int main()
             goto mainmenu;
             break;
         case 3:
-
-            system("cls");
-            std::cout << "[Hapus Jadwal]" << std::endl;
-            break;
-        case 4:
-            std::cout << "Program Terminated..." << std::endl;
+            std::cout << "\nProgram Terminated..." << std::endl;
             break;
         default:
-            std::cout << "Input Invalid" << std::endl;
+            std::cout << "\nInput Invalid...\n" << std::endl;
             system("pause");
+            system("cls");
         }
-    } while (menu < 1 || menu > 4);
+    } while (menu < 1 || menu > 3);
 }
