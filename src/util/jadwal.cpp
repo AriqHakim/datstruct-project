@@ -70,7 +70,7 @@ namespace Hari
         return nullptr;
     }
 
-    void addVertex(pDayNode &head, const pNode pNew)
+    void addVertex(pDayNode &head, pNode pNew)
     {
         if (isEmpty(searchByKode(head->vertex, pNew->data.kode)))
         {

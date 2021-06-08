@@ -16,12 +16,7 @@ void inisiasiStatus(char arr[5])
     arr = init;
 }
 
-void changeColor(int kelas)
-{
-    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), kelas);
-}
-
-char inisiasiWarna() { return '0'; }
+char inisiasiKelas() { return '0'; }
 
 struct Node
 {

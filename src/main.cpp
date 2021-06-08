@@ -1,16 +1,17 @@
-//#include "util/graph.cpp"
-#include <iostream>
-#include <iomanip>
+#include "util/graph.cpp"
 
 int main()
 {
-    //Hari::pDayNode jadwal = Hari::inisiasiHari();
+    Hari::pDayNode jadwal = Hari::inisiasiHari();
+    Graph::graph head = Graph::inisiasiGraph();
     int menu;
     int count = 0;
     std::string nama;
     std::string kode;
     int day;
     char confirm;
+    pNode pNew = nullptr;
+    Hari::pDayNode temp = nullptr;
     do
     {
 
@@ -36,6 +37,7 @@ int main()
             std::cout << "Kode Mapel\t: ";
             std::cin >> kode;
             std::cout << "\n";
+            pNew = createNode(Guru{kode, nama, {'0', '0', '0', '0', '0'}, inisiasiKelas()});
 
             std::cout << "[Ketersediaan]" << std::endl;
             std::cout << "1. Senin\n2. Selasa\n3. Rabu\n4. Kamis\n5. Jumat\n6. Kembali" << std::endl;
@@ -46,19 +48,34 @@ int main()
             switch (day)
             {
             case 1:
-                //isi
+                Graph::insertNode(head, pNew);
+                temp = Hari::searchByHari(jadwal, "Senin");
+                // Hari::addVertex(temp, pNew);
+                Graph::addEdge(head, pNew, temp);
                 break;
             case 2:
-                //isi
+                Graph::insertNode(head, pNew);
+                temp = Hari::searchByHari(jadwal, "Selasa");
+                // Hari::addVertex(temp, pNew);
+                Graph::addEdge(head, pNew, temp);
                 break;
             case 3:
-                //isi
+                Graph::insertNode(head, pNew);
+                temp = Hari::searchByHari(jadwal, "Rabu");
+                // Hari::addVertex(temp, pNew);
+                Graph::addEdge(head, pNew, temp);
                 break;
             case 4:
-                //isi
+                Graph::insertNode(head, pNew);
+                temp = Hari::searchByHari(jadwal, "Kamis");
+                // Hari::addVertex(temp, pNew);
+                Graph::addEdge(head, pNew, temp);
                 break;
             case 5:
-                //isi
+                Graph::insertNode(head, pNew);
+                temp = Hari::searchByHari(jadwal, "Jumat");
+                // Hari::addVertex(temp, pNew);
+                Graph::addEdge(head, pNew, temp);
                 break;
             case 6:
                 std::cout << "Kembali ke menu utama\n";
@@ -98,7 +115,8 @@ int main()
             system("cls");
             std::cout << "[Lihat Jadwal]\n\n";
             std::cout << "[Tabel Jadwal]\n";
-            std::cout << "| " << std::setw(3) << std::setfill(' ')<<std::left << "No"
+            std::cout << "+" << std::setw(94) << std::setfill('-') << "+\n";
+            std::cout << "| " << std::setw(3) << std::setfill(' ') << std::left << "No"
                       << "| " << std::setw(15) <<std::setfill(' ') << std::left << "Nama"
                       << "| " << std::setw(15) <<std::setfill(' ') << std::left << "Kode Mapel"
                       << "| " << std::setw(7) <<std::setfill(' ') << std::left << "Senin"
@@ -107,6 +125,7 @@ int main()
                       << "| " << std::setw(7) <<std::setfill(' ') << std::left << "Kamis"
                       << "| " << std::setw(7) <<std::setfill(' ') << std::left << "Jumat"
                       << "| " << std::setw(7) <<std::setfill(' ') << std::left << "kelas" << "| \n";
+            Graph::printGraph(head);
             
             system("pause");
             system("cls");

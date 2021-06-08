@@ -33,7 +33,7 @@ pilihan
 
 [tabel jadwal]
 | no | nama	| kode mapel | senin | selasa | rabu  | kamis | jumat |
-|    |          |            | p | s |  p | s | p | s | p | s | p | s |
+|    |      |            | p | s |  p | s | p | s | p | s | p | s |
 
 [hapus jadwal]
 kode mapel:

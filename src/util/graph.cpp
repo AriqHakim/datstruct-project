@@ -16,7 +16,7 @@ namespace Graph
         return g;
     }
 
-    void insertNode(graph head, pNode pNew)
+    void insertNode(graph& head, pNode pNew)
     {
         insertFirst(head.adjacencyList, pNew);
     }
@@ -132,17 +132,21 @@ namespace Graph
 
     void printGraph(graph head){
         int count = 1;
-        for_each(head.adjacencyList, [&count](const pNode &p){
-             std::cout << "| " << std::setw(3) << std::setfill(' ')<<std::left << count ;
-             std::cout << "| "<< std::setw(15) <<std::setfill(' ') << std::left << p->data.nama
-                    << "| " << std::setw(15) <<std::setfill(' ') << std::left << p->data.kode
-                    << "| " << std::setw(7) <<std::setfill(' ') << std::left << p->data.status[0]
-                    << "| " << std::setw(7) <<std::setfill(' ') << std::left << p->data.status[1]
-                    << "| " << std::setw(7) <<std::setfill(' ') << std::left << p->data.status[2]
-                    << "| " << std::setw(7) <<std::setfill(' ') << std::left << p->data.status[3]
-                    << "| " << std::setw(7) <<std::setfill(' ') << std::left << p->data.status[4] 
-                    << "| " << std::setw(7) <<std::setfill(' ') << std::left << p->data.kelas << "| \n";
-            count++;
-        });
+        if(!isEmpty(head.adjacencyList)){
+            for_each(head.adjacencyList, [&count](const pNode &p){
+                std::cout << "| " << std::setw(3) << std::setfill(' ')<<std::left << count ;
+                std::cout << "| "<< std::setw(15) <<std::setfill(' ') << std::left << p->data.nama
+                        << "| " << std::setw(15) <<std::setfill(' ') << std::left << p->data.kode
+                        << "| " << std::setw(7) <<std::setfill(' ') << std::left << p->data.status[0]
+                        << "| " << std::setw(7) <<std::setfill(' ') << std::left << p->data.status[1]
+                        << "| " << std::setw(7) <<std::setfill(' ') << std::left << p->data.status[2]
+                        << "| " << std::setw(7) <<std::setfill(' ') << std::left << p->data.status[3]
+                        << "| " << std::setw(7) <<std::setfill(' ') << std::left << p->data.status[4] 
+                        << "| " << std::setw(7) <<std::setfill(' ') << std::left << p->data.kelas << "| \n";
+                count++;
+            });
+        } else {
+            std::cout << "Graph Kosong!\n";
+        }
     }
 } // nasmespace graph
