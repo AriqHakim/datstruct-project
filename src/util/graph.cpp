@@ -1,6 +1,7 @@
 #include "jadwal.cpp"
 #include <functional>
 #include <iostream>
+#include <iomanip>
 
 namespace Graph
 {
@@ -27,8 +28,8 @@ namespace Graph
         {
             for_each(vertexList, [&pNew](const pNode &p)
                      {
-                         insertFirst(pNew->edge, p);
-                         insertFirst(p->edge, pNew);
+                         insertFirst(pNew->edge, createNode(p->data));
+                         insertFirst(p->edge, createNode(pNew->data));
                          pNew->totaledge++;
                          p->totaledge++;
                      });
@@ -40,6 +41,36 @@ namespace Graph
         }
     }
 
+    void swapDdata(pNode &a, pNode &b){
+        pNode temp = new Node;
+        temp -> data = a->data;
+        temp -> edge = a-> edge;
+        temp ->totaledge = a -> totaledge;
+
+        a -> data = b->data;
+        a -> edge = b-> edge;
+        a ->totaledge = b -> totaledge;
+
+        b -> data = a->data;
+        b -> edge = a-> edge;
+        b ->totaledge = a -> totaledge;
+    }
+
+    void sortGraph(graph &head){
+        pNode temp = head.adjacencyList;
+        while (temp) {
+            pNode max = temp;
+            pNode r = temp->next;
+            while (r) {
+            if (max->totaledge > r->totaledge)
+                max = r;
+            r = r->next;
+            }
+            swapDdata(temp, max);
+            temp = temp->next;
+        }
+    }
+
     pNode searchBiggestNotColored(graph head)
     {
         if (isEmpty(head.adjacencyList))
@@ -48,7 +79,7 @@ namespace Graph
         pNode biggest = head.adjacencyList;
         for_each(head.adjacencyList, [&biggest](const pNode &p)
                  {
-                     if (p->totaledge > biggest->totaledge && p->data.color == 7)
+                     if (p->totaledge > biggest->totaledge && p->data.kelas == '0')
                      {
                          biggest = p;
                      }
@@ -59,14 +90,14 @@ namespace Graph
 
     bool isColored(pNode p)
     {
-        return (p->data.color == 7) ? false : true;
+        return (p->data.kelas == '0') ? false : true;
     }
 
     bool isGraphColored(graph head)
     {
         for_each(head.adjacencyList, [](const pNode &p)
                  {
-                     if (p->data.color == 7)
+                     if (p->data.kelas == '0')
                      {
                          return false;
                      }
@@ -75,17 +106,17 @@ namespace Graph
     }
 
     //Welsch-Powell algoorithm
-    void colorIt(graph &head, int &firstColor)
+    void colorIt(graph &head, char &Class)
     {
         pNode temp = searchBiggestNotColored(head);
-        temp->data.color = firstColor;
-        //firstColor++;
-        for_each(head.adjacencyList, [&head, &temp, &firstColor](const pNode &p)
+        temp->data.kelas = Class;
+        //Class++;
+        for_each(head.adjacencyList, [&head, &temp, &Class](const pNode &p)
                  {
                      pNode curr = searchByKode(temp->edge, p->data.kode);
                      if (isEmpty(curr) && !isColored(curr))
                      {
-                         p->data.color = firstColor;
+                         p->data.kelas = Class;
                      }
                  });
         if (isGraphColored(head))
@@ -94,24 +125,23 @@ namespace Graph
         }
         else
         {
-            firstColor++;
-            colorIt(head, firstColor);
+            Class++;
+            colorIt(head, Class);
         }
     }
 
     void printGraph(graph head){
         int count = 1;
         for_each(head.adjacencyList, [&count](const pNode &p){
-             std::cout << "| " << std::setw(3) << std::setfill(' ')<<std::left << count << "| ";
-             changeColor(p->data.color);
-             std::cout << std::setw(15) <<std::setfill(' ') << std::left << p->data.nama;
-             changeColor(7);
-             std::cout << "| " << std::setw(15) <<std::setfill(' ') << std::left << p->data.kode
+             std::cout << "| " << std::setw(3) << std::setfill(' ')<<std::left << count ;
+             std::cout << "| "<< std::setw(15) <<std::setfill(' ') << std::left << p->data.nama
+                    << "| " << std::setw(15) <<std::setfill(' ') << std::left << p->data.kode
                     << "| " << std::setw(7) <<std::setfill(' ') << std::left << p->data.status[0]
                     << "| " << std::setw(7) <<std::setfill(' ') << std::left << p->data.status[1]
                     << "| " << std::setw(7) <<std::setfill(' ') << std::left << p->data.status[2]
                     << "| " << std::setw(7) <<std::setfill(' ') << std::left << p->data.status[3]
-                    << "| " << std::setw(7) <<std::setfill(' ') << std::left << p->data.status[4] << "| \n";
+                    << "| " << std::setw(7) <<std::setfill(' ') << std::left << p->data.status[4] 
+                    << "| " << std::setw(7) <<std::setfill(' ') << std::left << p->data.kelas << "| \n";
             count++;
         });
     }

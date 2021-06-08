@@ -7,7 +7,7 @@ struct Guru
     std::string kode;
     std::string nama;
     char status[5];
-    int color;
+    char kelas;
 };
 
 void inisiasiStatus(char arr[5])
@@ -16,12 +16,12 @@ void inisiasiStatus(char arr[5])
     arr = init;
 }
 
-void changeColor(int color)
+void changeColor(int kelas)
 {
-    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), color);
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), kelas);
 }
 
-int inisiasiWarna() { return 7; }
+char inisiasiWarna() { return '0'; }
 
 struct Node
 {

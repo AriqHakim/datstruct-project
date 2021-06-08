@@ -105,7 +105,8 @@ int main()
                       << "| " << std::setw(7) <<std::setfill(' ') << std::left << "Selasa"
                       << "| " << std::setw(7) <<std::setfill(' ') << std::left << "Rabu"
                       << "| " << std::setw(7) <<std::setfill(' ') << std::left << "Kamis"
-                      << "| " << std::setw(7) <<std::setfill(' ') << std::left << "Jumat" << "| \n";
+                      << "| " << std::setw(7) <<std::setfill(' ') << std::left << "Jumat"
+                      << "| " << std::setw(7) <<std::setfill(' ') << std::left << "kelas" << "| \n";
             
             system("pause");
             system("cls");

@@ -74,7 +74,7 @@ namespace Hari
     {
         if (isEmpty(searchByKode(head->vertex, pNew->data.kode)))
         {
-            insertFirst(head->vertex, pNew);
+            insertFirst(head->vertex, createNode(pNew->data));
         }
         else
         {
