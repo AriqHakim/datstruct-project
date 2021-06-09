@@ -26,7 +26,7 @@ int main()
         switch (menu)
         {
         case 1:
-        balikmenu1:
+        
             system("cls");
             count = count + 1;
             std::cout << "[Input Jadwal]\n\n";
@@ -38,7 +38,9 @@ int main()
             std::cin >> kode;
             std::cout << "\n";
             pNew = createNode(Guru{kode, nama, {'0', '0', '0', '0', '0'}, inisiasiKelas()});
-
+            Graph::insertNode(head, pNew);
+        balikmenu1:
+            system("cls");
             std::cout << "[Ketersediaan]" << std::endl;
             std::cout << "1. Senin\n2. Selasa\n3. Rabu\n4. Kamis\n5. Jumat\n6. Kembali" << std::endl;
             std::cout << "Pilihan\t: ";
@@ -48,34 +50,34 @@ int main()
             switch (day)
             {
             case 1:
-                Graph::insertNode(head, pNew);
                 temp = Hari::searchByHari(jadwal, "Senin");
                 // Hari::addVertex(temp, pNew);
                 Graph::addEdge(head, pNew, temp);
+                Hari::setStatusSenin(pNew);
                 break;
             case 2:
-                Graph::insertNode(head, pNew);
                 temp = Hari::searchByHari(jadwal, "Selasa");
                 // Hari::addVertex(temp, pNew);
                 Graph::addEdge(head, pNew, temp);
+                Hari::setStatusSelasa(pNew);
                 break;
             case 3:
-                Graph::insertNode(head, pNew);
                 temp = Hari::searchByHari(jadwal, "Rabu");
                 // Hari::addVertex(temp, pNew);
                 Graph::addEdge(head, pNew, temp);
+                Hari::setStatusRabu(pNew);
                 break;
             case 4:
-                Graph::insertNode(head, pNew);
                 temp = Hari::searchByHari(jadwal, "Kamis");
                 // Hari::addVertex(temp, pNew);
                 Graph::addEdge(head, pNew, temp);
+                Hari::setStatusKamis(pNew);
                 break;
             case 5:
-                Graph::insertNode(head, pNew);
                 temp = Hari::searchByHari(jadwal, "Jumat");
                 // Hari::addVertex(temp, pNew);
                 Graph::addEdge(head, pNew, temp);
+                Hari::setStatusJumat(pNew);
                 break;
             case 6:
                 std::cout << "Kembali ke menu utama\n";
@@ -111,7 +113,7 @@ int main()
             }
             break;
         case 2:
-
+            Graph::sortGraph(head);
             system("cls");
             std::cout << "[Lihat Jadwal]\n\n";
             std::cout << "[Tabel Jadwal]\n";

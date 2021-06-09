@@ -24,7 +24,7 @@ namespace Graph
     void addEdge(graph &head, pNode pNew, Hari::pDayNode &hari)
     {
         pNode vertexList = hari->vertex;
-        if (isEmpty(searchByKode(vertexList, pNew->data.kode)))
+        if (!isEmpty(searchByKode(vertexList, pNew->data.kode)))
         {
             for_each(vertexList, [&pNew](const pNode &p)
                      {
@@ -37,7 +37,7 @@ namespace Graph
         }
         else
         {
-            return;
+            std::cout<<"Search gagal\n";
         }
     }
 
@@ -61,7 +61,7 @@ namespace Graph
         while (temp) {
             pNode max = temp;
             pNode r = temp->next;
-            while (r) {
+            while (r != nullptr) {
             if (max->totaledge > r->totaledge)
                 max = r;
             r = r->next;
