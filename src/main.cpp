@@ -28,6 +28,7 @@ int main()
         case 1:
         
             system("cls");
+        balikmenu1:
             count = count + 1;
             std::cout << "[Input Jadwal]\n\n";
             std::cout << "Input ke-" << count <<std::endl;
@@ -39,7 +40,7 @@ int main()
             std::cout << "\n";
             pNew = createNode(Guru{kode, nama, {'0', '0', '0', '0', '0'}, inisiasiKelas()});
             Graph::insertNode(head, pNew);
-        balikmenu1:
+        
             system("cls");
             std::cout << "[Ketersediaan]" << std::endl;
             std::cout << "1. Senin\n2. Selasa\n3. Rabu\n4. Kamis\n5. Jumat\n6. Kembali" << std::endl;
@@ -117,7 +118,15 @@ int main()
             system("cls");
             std::cout << "[Lihat Jadwal]\n\n";
             std::cout << "[Tabel Jadwal]\n";
-            std::cout << "+" << std::setw(94) << std::setfill('-') << "+\n";
+            std::cout << "+" << std::setw(5) << std::setfill('-') << std::right 
+                      << "+" << std::setw(17) << std::setfill('-') << std::right
+                      << "+" << std::setw(17) << std::setfill('-') << std::right 
+                      << "+" << std::setw(9) << std::setfill('-') << std::right 
+                      << "+" << std::setw(9) << std::setfill('-') << std::right 
+                      << "+" << std::setw(9) << std::setfill('-') << std::right 
+                      << "+" << std::setw(9) << std::setfill('-') << std::right 
+                      << "+" << std::setw(9) << std::setfill('-') << std::right 
+                      << "+" << std::setw(10) << std::setfill('-') << std::right << "+\n";
             std::cout << "| " << std::setw(3) << std::setfill(' ') << std::left << "No"
                       << "| " << std::setw(15) <<std::setfill(' ') << std::left << "Nama"
                       << "| " << std::setw(15) <<std::setfill(' ') << std::left << "Kode Mapel"
@@ -127,6 +136,15 @@ int main()
                       << "| " << std::setw(7) <<std::setfill(' ') << std::left << "Kamis"
                       << "| " << std::setw(7) <<std::setfill(' ') << std::left << "Jumat"
                       << "| " << std::setw(7) <<std::setfill(' ') << std::left << "kelas" << "| \n";
+            std::cout << "+" << std::setw(5) << std::setfill('-') << std::right 
+                      << "+" << std::setw(17) << std::setfill('-') << std::right
+                      << "+" << std::setw(17) << std::setfill('-') << std::right 
+                      << "+" << std::setw(9) << std::setfill('-') << std::right 
+                      << "+" << std::setw(9) << std::setfill('-') << std::right 
+                      << "+" << std::setw(9) << std::setfill('-') << std::right 
+                      << "+" << std::setw(9) << std::setfill('-') << std::right 
+                      << "+" << std::setw(9) << std::setfill('-') << std::right 
+                      << "+" << std::setw(10) << std::setfill('-') << std::right << "+\n";
             Graph::printGraph(head);
             
             system("pause");

@@ -147,6 +147,15 @@ namespace Graph
                         << "| " << std::setw(7) <<std::setfill(' ') << std::left << p->data.status[3]
                         << "| " << std::setw(7) <<std::setfill(' ') << std::left << p->data.status[4] 
                         << "| " << std::setw(7) <<std::setfill(' ') << std::left << p->data.kelas << "| \n";
+                std::cout << "+" << std::setw(5) << std::setfill('-') << std::right 
+                      << "+" << std::setw(17) << std::setfill('-') << std::right
+                      << "+" << std::setw(17) << std::setfill('-') << std::right 
+                      << "+" << std::setw(9) << std::setfill('-') << std::right 
+                      << "+" << std::setw(9) << std::setfill('-') << std::right 
+                      << "+" << std::setw(9) << std::setfill('-') << std::right 
+                      << "+" << std::setw(9) << std::setfill('-') << std::right 
+                      << "+" << std::setw(9) << std::setfill('-') << std::right 
+                      << "+" << std::setw(10) << std::setfill('-') << std::right << "+\n";
                 count++;
             });
         } else {
