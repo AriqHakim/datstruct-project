@@ -114,7 +114,6 @@ namespace Graph
     {
         pNode temp = searchBiggestNotColored(head);
         temp->data.kelas = Class;
-        //Class++;
         for_each(head.adjacencyList, [&head, &temp, &Class](pNode &p)
                  {
                      pNode curr = searchByKode(temp->edge, p->data.kode);
