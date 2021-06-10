@@ -110,7 +110,7 @@ namespace Graph
     }
 
     //Welsch-Powell algoorithm
-    void colorIt(graph &head, char &Class)
+    void colorIt(graph &head, char Class)
     {
         pNode temp = searchBiggestNotColored(head);
         temp->data.kelas = Class;
@@ -122,7 +122,7 @@ namespace Graph
                          p->data.kelas = Class;
                      }
                  });
-        if (isGraphColored(head))
+        if (true)
         {
             return;
         }

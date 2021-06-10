@@ -28,7 +28,6 @@ int main()
         case 1:
         
             system("cls");
-        balikmenu1:
             count = count + 1;
             std::cout << "[Input Jadwal]\n\n";
             std::cout << "Input ke-" << count <<std::endl;
@@ -41,6 +40,7 @@ int main()
             pNew = createNode(Guru{kode, nama, {'0', '0', '0', '0', '0'}, inisiasiKelas()});
             Graph::insertNode(head, pNew);
         
+        balikmenu1:
             system("cls");
             std::cout << "[Ketersediaan]" << std::endl;
             std::cout << "1. Senin\n2. Selasa\n3. Rabu\n4. Kamis\n5. Jumat\n6. Kembali" << std::endl;
