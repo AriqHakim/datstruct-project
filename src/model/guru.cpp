@@ -39,7 +39,7 @@ pNode createNode(Guru data)
 
 bool isEmpty(pNode head)
 {
-    return (head = nullptr) ? true : false;
+    return (head == nullptr) ? true : false;
 }
 
 void insertFirst(pNode &head, const pNode pNew)

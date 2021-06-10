@@ -1,5 +1,6 @@
 // #pragma once
 #include "../model/guru.cpp"
+#include <iostream>
 
 namespace Hari
 {
@@ -27,7 +28,7 @@ namespace Hari
 
     bool isDayEmpty(pDayNode head)
     {
-        return (head = nullptr) ? true : false;
+        return (head == nullptr) ? true : false;
     }
 
     void insertDayFirst(pDayNode &head, const pDayNode pNew)
@@ -78,7 +79,7 @@ namespace Hari
         }
         else
         {
-            return;
+            std::cout<<"addvertex gagal\n";
         }
     }
 

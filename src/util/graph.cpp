@@ -24,7 +24,7 @@ namespace Graph
     void addEdge(graph &head, pNode pNew, Hari::pDayNode &hari)
     {
         pNode vertexList = hari->vertex;
-        if (!isEmpty(searchByKode(vertexList, pNew->data.kode)))
+        if (isEmpty(searchByKode(vertexList, pNew->data.kode)))
         {
             for_each(vertexList, [&pNew](const pNode &p)
                      {
