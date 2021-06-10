@@ -79,35 +79,43 @@ namespace Hari
         }
         else
         {
-            std::cout<<"addvertex gagal\n";
+            std::cout << "addvertex gagal\n";
         }
     }
 
-    template <typename F> void for_each (pDayNode head, F func){
+    template <typename F>
+    void for_each(pDayNode head, F func)
+    {
         pDayNode curr = head;
-        while (curr != nullptr){
+        while (curr != nullptr)
+        {
             func(curr);
-            curr = curr -> next;
+            curr = curr->next;
         }
     }
 
-    void setStatusSenin(pNode &head){
-        head->status.jadwal[0] = '1';        
+    void setStatusSenin(pNode &head)
+    {
+        head->status.jadwal[0] = '1';
     }
 
-    void setStatusSelasa(pNode &head){
-         head->status.jadwal[1] = '1';
+    void setStatusSelasa(pNode &head)
+    {
+        head->status.jadwal[1] = '1';
     }
 
-    void setStatusRabu(pNode &head){
-         head->status.jadwal[2] = '1';
+    void setStatusRabu(pNode &head)
+    {
+        head->status.jadwal[2] = '1';
     }
 
-    void setStatusKamis(pNode &head){
-         head->status.jadwal[3] = '1';
+    void setStatusKamis(pNode &head)
+    {
+        head->status.jadwal[3] = '1';
     }
 
-    void setStatusJumat(pNode &head){
-         head->status.jadwal[4] = '1';
+    void setStatusJumat(pNode &head)
+    {
+        head->status.jadwal[4] = '1';
     }
 } // namespace hari

@@ -8,15 +8,18 @@ struct Guru
     std::string nama;
 };
 
-struct Status{
+struct Status
+{
     char jadwal[5];
     char kelas;
     bool colored;
 };
 
-Status inisiasiStatus(){
+Status inisiasiStatus()
+{
     Status s;
-    for(int i = 0; i < 5; i++){
+    for (int i = 0; i < 5; i++)
+    {
         s.jadwal[i] = '0';
     }
     s.kelas = '0';

@@ -63,6 +63,7 @@ namespace Graph
         b ->totaledge = temp -> totaledge;
     }
 
+    //sort berdasarkan jumlah edge (tetangga)
     void sortGraph(graph &head){
         pNode temp = head.adjacencyList;
         while (!isEmpty(temp)) {
@@ -78,23 +79,6 @@ namespace Graph
         }
     }
 
-    pNode searchBiggestNotColored(graph head)
-    {
-        if (isEmpty(head.adjacencyList))
-            return nullptr;
-
-        pNode biggest = head.adjacencyList;
-        for_each(head.adjacencyList, [&biggest](const pNode &p)
-                 {
-                     if (p->totaledge > biggest->totaledge && p->status.kelas == '0')
-                     {
-                         biggest = p;
-                     }
-                 });
-
-        return biggest;
-    }
-
     bool isColored(pNode p)
     {
         return p->status.colored;
@@ -104,7 +88,7 @@ namespace Graph
     {
         for_each(head.adjacencyList, [](const pNode &p)
                  {
-                     if (!p->status.colored)
+                     if (!isColored(p))
                      {
                          return false;
                      }
@@ -112,19 +96,55 @@ namespace Graph
         return true;
     }
 
+    void setUncolored(graph &head){
+        for_each(head.adjacencyList, [](pNode &p){
+            p->status.colored = false;
+        });
+    }
+
+    pNode searchBiggestNotColored(graph head)
+    {
+        if (isEmpty(head.adjacencyList))
+            return nullptr;
+
+        pNode biggest = head.adjacencyList;
+        for_each(head.adjacencyList, [&biggest](const pNode &p)
+                 {
+                     if (p->totaledge > biggest->totaledge && !isColored(p))
+                     {
+                         biggest = p;
+                     }
+                 });
+
+        return biggest;
+    }
+
     //Welsch-Powell algoorithm
     void colorIt(graph &head, char Class)
     {
-        pNode temp = searchBiggestNotColored(head);
-        temp->status.kelas = Class;
-        for_each(head.adjacencyList, [&head, &temp, &Class](pNode &p)
-                 {
-                     pNode curr = searchByKode(temp->edge, p->data.kode);
-                     if (isEmpty(curr) && !isColored(curr))
-                     {
-                         p->status.kelas = Class;
-                     }
-                 });
+        pNode biggest = searchBiggestNotColored(head);
+        biggest->status.kelas = Class;
+        biggest->status.colored = true;
+        // for_each(head.adjacencyList, [&temp, &Class](pNode &p)
+        //          {
+        //              pNode curr = searchByKode(temp->edge, p->data.kode);
+        //              if (isEmpty(curr) && !isColored(curr))
+        //              {
+        //                  p->status.kelas = Class;
+        //                  p->status.colored = true;
+        //              }
+        //          });
+
+        pNode temp = head.adjacencyList;
+        while(!isEmpty(temp)){
+            pNode curr = searchByKode(biggest->edge, temp->data.kode);
+            if (isEmpty(curr) && !isColored(curr))
+            {
+                temp->status.kelas = Class;
+                temp->status.colored = true;
+            }
+            temp = temp->next;
+        }
         if (true)
         {
             return;
