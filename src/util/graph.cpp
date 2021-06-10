@@ -21,27 +21,31 @@ namespace Graph
         insertFirst(head.adjacencyList, pNew);
     }
 
-    void addEdge(graph &head, pNode pNew, Hari::pDayNode &hari)
+    void addEdge(graph &head, pNode &pNew, Hari::pDayNode &hari)
     {
         pNode vertexList = hari->vertex;
         if (isEmpty(searchByKode(vertexList, pNew->data.kode)))
         {
-            for_each(vertexList, [&pNew](const pNode &p)
-                     {
-                         insertFirst(pNew->edge, createNode(p->data));
-                         insertFirst(p->edge, createNode(pNew->data));
-                         pNew->totaledge++;
-                         p->totaledge++;
-                     });
+            pNode temp = vertexList;
+            while(temp != nullptr){
+                pNode inGraph = searchByKode(head.adjacencyList, temp->data.kode);
+                if(isEmpty(searchByKode(pNew->edge, temp->data.kode)) && isEmpty(searchByKode(temp->edge, pNew->data.kode))){
+                    insertFirst(pNew->edge, createNode(temp->data));
+                    insertFirst(inGraph->edge, createNode(pNew->data));
+                    pNew->totaledge++;
+                    inGraph->totaledge++;
+                }
+                temp = temp->next;
+            }
             Hari::addVertex(hari, pNew);
         }
         else
         {
-            std::cout<<"Search gagal\n";
+            return;
         }
     }
 
-    void swapDdata(pNode &a, pNode &b){
+    void swapData(pNode &a, pNode &b){
         pNode temp = new Node;
         temp -> data = a->data;
         temp -> edge = a-> edge;
@@ -51,22 +55,22 @@ namespace Graph
         a -> edge = b-> edge;
         a ->totaledge = b -> totaledge;
 
-        b -> data = a->data;
-        b -> edge = a-> edge;
-        b ->totaledge = a -> totaledge;
+        b -> data = temp -> data;
+        b -> edge = temp -> edge;
+        b ->totaledge = temp -> totaledge;
     }
 
     void sortGraph(graph &head){
         pNode temp = head.adjacencyList;
-        while (temp) {
+        while (!isEmpty(temp)) {
             pNode max = temp;
             pNode r = temp->next;
-            while (r != nullptr) {
-            if (max->totaledge > r->totaledge)
-                max = r;
-            r = r->next;
+            while (!isEmpty(r)) {
+                if (r->totaledge > max->totaledge)
+                    max = r;
+                r = r->next;
             }
-            swapDdata(temp, max);
+            swapData(temp, max);
             temp = temp->next;
         }
     }
@@ -111,7 +115,7 @@ namespace Graph
         pNode temp = searchBiggestNotColored(head);
         temp->data.kelas = Class;
         //Class++;
-        for_each(head.adjacencyList, [&head, &temp, &Class](const pNode &p)
+        for_each(head.adjacencyList, [&head, &temp, &Class](pNode &p)
                  {
                      pNode curr = searchByKode(temp->edge, p->data.kode);
                      if (isEmpty(curr) && !isColored(curr))
