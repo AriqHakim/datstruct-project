@@ -92,22 +92,22 @@ namespace Hari
     }
 
     void setStatusSenin(pNode &head){
-        head->data.status[0] = '1';        
+        head->status.jadwal[0] = '1';        
     }
 
     void setStatusSelasa(pNode &head){
-         head->data.status[1] = '1';
+         head->status.jadwal[1] = '1';
     }
 
     void setStatusRabu(pNode &head){
-         head->data.status[2] = '1';
+         head->status.jadwal[2] = '1';
     }
 
     void setStatusKamis(pNode &head){
-         head->data.status[3] = '1';
+         head->status.jadwal[3] = '1';
     }
 
     void setStatusJumat(pNode &head){
-         head->data.status[4] = '1';
+         head->status.jadwal[4] = '1';
     }
 } // namespace hari

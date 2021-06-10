@@ -6,21 +6,28 @@ struct Guru
 {
     std::string kode;
     std::string nama;
-    char status[5];
-    char kelas;
 };
 
-void inisiasiStatus(char arr[5])
-{
-    char init[] = {'0', '0', '0', '0', '0'};
-    arr = init;
-}
+struct Status{
+    char jadwal[5];
+    char kelas;
+    bool colored;
+};
 
-char inisiasiKelas() { return '0'; }
+Status inisiasiStatus(){
+    Status s;
+    for(int i = 0; i < 5; i++){
+        s.jadwal[i] = '0';
+    }
+    s.kelas = '0';
+    s.colored = false;
+    return s;
+}
 
 struct Node
 {
     Guru data;
+    Status status;
     Node *edge;
     Node *next;
     int totaledge;
@@ -31,6 +38,7 @@ pNode createNode(Guru data)
 {
     pNode newNode = new Node;
     newNode->data = data;
+    newNode->status = inisiasiStatus();
     newNode->edge = nullptr;
     newNode->next = nullptr;
     newNode->totaledge = 0;

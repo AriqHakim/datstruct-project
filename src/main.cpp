@@ -37,7 +37,7 @@ int main()
             std::cout << "Kode Mapel\t: ";
             std::cin >> kode;
             std::cout << "\n";
-            pNew = createNode(Guru{kode, nama, {'0', '0', '0', '0', '0'}, inisiasiKelas()});
+            pNew = createNode(Guru{kode, nama});
             Graph::insertNode(head, pNew);
         
         balikmenu1:

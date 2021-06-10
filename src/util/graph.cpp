@@ -48,14 +48,17 @@ namespace Graph
     void swapData(pNode &a, pNode &b){
         pNode temp = new Node;
         temp -> data = a->data;
+        temp -> status = a->status;
         temp -> edge = a-> edge;
         temp ->totaledge = a -> totaledge;
 
         a -> data = b->data;
+        a -> status = b->status;
         a -> edge = b-> edge;
         a ->totaledge = b -> totaledge;
 
         b -> data = temp -> data;
+        b -> status = temp->status;
         b -> edge = temp -> edge;
         b ->totaledge = temp -> totaledge;
     }
@@ -83,7 +86,7 @@ namespace Graph
         pNode biggest = head.adjacencyList;
         for_each(head.adjacencyList, [&biggest](const pNode &p)
                  {
-                     if (p->totaledge > biggest->totaledge && p->data.kelas == '0')
+                     if (p->totaledge > biggest->totaledge && p->status.kelas == '0')
                      {
                          biggest = p;
                      }
@@ -94,14 +97,14 @@ namespace Graph
 
     bool isColored(pNode p)
     {
-        return (p->data.kelas == '0') ? false : true;
+        return p->status.colored;
     }
 
     bool isGraphColored(graph head)
     {
         for_each(head.adjacencyList, [](const pNode &p)
                  {
-                     if (p->data.kelas == '0')
+                     if (!p->status.colored)
                      {
                          return false;
                      }
@@ -113,13 +116,13 @@ namespace Graph
     void colorIt(graph &head, char Class)
     {
         pNode temp = searchBiggestNotColored(head);
-        temp->data.kelas = Class;
+        temp->status.kelas = Class;
         for_each(head.adjacencyList, [&head, &temp, &Class](pNode &p)
                  {
                      pNode curr = searchByKode(temp->edge, p->data.kode);
                      if (isEmpty(curr) && !isColored(curr))
                      {
-                         p->data.kelas = Class;
+                         p->status.kelas = Class;
                      }
                  });
         if (true)
@@ -140,12 +143,12 @@ namespace Graph
                 std::cout << "| " << std::setw(3) << std::setfill(' ')<<std::left << count ;
                 std::cout << "| "<< std::setw(15) <<std::setfill(' ') << std::left << p->data.nama
                         << "| " << std::setw(15) <<std::setfill(' ') << std::left << p->data.kode
-                        << "| " << std::setw(7) <<std::setfill(' ') << std::left << p->data.status[0]
-                        << "| " << std::setw(7) <<std::setfill(' ') << std::left << p->data.status[1]
-                        << "| " << std::setw(7) <<std::setfill(' ') << std::left << p->data.status[2]
-                        << "| " << std::setw(7) <<std::setfill(' ') << std::left << p->data.status[3]
-                        << "| " << std::setw(7) <<std::setfill(' ') << std::left << p->data.status[4] 
-                        << "| " << std::setw(7) <<std::setfill(' ') << std::left << p->data.kelas << "| \n";
+                        << "| " << std::setw(7) <<std::setfill(' ') << std::left << p->status.jadwal[0]
+                        << "| " << std::setw(7) <<std::setfill(' ') << std::left << p->status.jadwal[1]
+                        << "| " << std::setw(7) <<std::setfill(' ') << std::left << p->status.jadwal[2]
+                        << "| " << std::setw(7) <<std::setfill(' ') << std::left << p->status.jadwal[3]
+                        << "| " << std::setw(7) <<std::setfill(' ') << std::left << p->status.jadwal[4] 
+                        << "| " << std::setw(7) <<std::setfill(' ') << std::left << p->status.kelas << "| \n";
                 std::cout << "+" << std::setw(5) << std::setfill('-') << std::right 
                       << "+" << std::setw(17) << std::setfill('-') << std::right
                       << "+" << std::setw(17) << std::setfill('-') << std::right 
