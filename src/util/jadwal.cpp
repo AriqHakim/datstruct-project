@@ -1,6 +1,5 @@
 // #pragma once
 #include "../model/guru.cpp"
-#include <iostream>
 
 namespace Hari
 {
@@ -79,7 +78,7 @@ namespace Hari
         }
         else
         {
-            std::cout << "addvertex gagal\n";
+            return;
         }
     }
 

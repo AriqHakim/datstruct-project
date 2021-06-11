@@ -48,6 +48,16 @@ pNode createNode(Guru data)
     return newNode;
 }
 
+void deleteList(pNode &head)
+{
+    while (head != nullptr)
+    {
+        pNode temp = head;
+        head = temp->next;
+        delete temp;
+    }
+}
+
 bool isEmpty(pNode head)
 {
     return (head == nullptr) ? true : false;

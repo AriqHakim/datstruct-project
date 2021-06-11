@@ -4,6 +4,7 @@ int main()
 {
     Hari::pDayNode jadwal = Hari::inisiasiHari();
     Graph::graph head = Graph::inisiasiGraph();
+    char initKelas = 'A';
     int menu;
     int count = 0;
     std::string nama;
@@ -26,11 +27,11 @@ int main()
         switch (menu)
         {
         case 1:
-        
+
             system("cls");
             count = count + 1;
             std::cout << "[Input Jadwal]\n\n";
-            std::cout << "Input ke-" << count <<std::endl;
+            std::cout << "Input ke-" << count << std::endl;
             std::cout << "[Identitas Guru]" << std::endl;
             std::cout << "Nama\t\t: ";
             std::cin >> nama;
@@ -39,7 +40,7 @@ int main()
             std::cout << "\n";
             pNew = createNode(Guru{kode, nama});
             Graph::insertNode(head, pNew);
-        
+
         balikmenu1:
             system("cls");
             std::cout << "[Ketersediaan]" << std::endl;
@@ -89,12 +90,13 @@ int main()
                 break;
             default:
                 count = count - 1;
-                std::cout << "Input Invalid...\n" << std::endl;
+                std::cout << "Input Invalid...\n"
+                          << std::endl;
                 system("pause");
                 system("cls");
                 goto balikmenu1;
             }
-            reconfirm:
+        reconfirm:
             std::cout << "Input hari/guru lain (y/n)\t: ";
             std::cin >> confirm;
             if (confirm == 'n' || confirm == 'N')
@@ -115,38 +117,41 @@ int main()
             break;
         case 2:
             Graph::sortGraph(head);
+            head = Graph::colorIt(head, initKelas);
             system("cls");
             std::cout << "[Lihat Jadwal]\n\n";
             std::cout << "[Tabel Jadwal]\n";
-            std::cout << "+" << std::setw(5) << std::setfill('-') << std::right 
+            std::cout << "+" << std::setw(5) << std::setfill('-') << std::right
                       << "+" << std::setw(17) << std::setfill('-') << std::right
-                      << "+" << std::setw(17) << std::setfill('-') << std::right 
-                      << "+" << std::setw(9) << std::setfill('-') << std::right 
-                      << "+" << std::setw(9) << std::setfill('-') << std::right 
-                      << "+" << std::setw(9) << std::setfill('-') << std::right 
-                      << "+" << std::setw(9) << std::setfill('-') << std::right 
-                      << "+" << std::setw(9) << std::setfill('-') << std::right 
+                      << "+" << std::setw(17) << std::setfill('-') << std::right
+                      << "+" << std::setw(9) << std::setfill('-') << std::right
+                      << "+" << std::setw(9) << std::setfill('-') << std::right
+                      << "+" << std::setw(9) << std::setfill('-') << std::right
+                      << "+" << std::setw(9) << std::setfill('-') << std::right
+                      << "+" << std::setw(9) << std::setfill('-') << std::right
                       << "+" << std::setw(10) << std::setfill('-') << std::right << "+\n";
             std::cout << "| " << std::setw(3) << std::setfill(' ') << std::left << "No"
-                      << "| " << std::setw(15) <<std::setfill(' ') << std::left << "Nama"
-                      << "| " << std::setw(15) <<std::setfill(' ') << std::left << "Kode Mapel"
-                      << "| " << std::setw(7) <<std::setfill(' ') << std::left << "Senin"
-                      << "| " << std::setw(7) <<std::setfill(' ') << std::left << "Selasa"
-                      << "| " << std::setw(7) <<std::setfill(' ') << std::left << "Rabu"
-                      << "| " << std::setw(7) <<std::setfill(' ') << std::left << "Kamis"
-                      << "| " << std::setw(7) <<std::setfill(' ') << std::left << "Jumat"
-                      << "| " << std::setw(7) <<std::setfill(' ') << std::left << "kelas" << "| \n";
-            std::cout << "+" << std::setw(5) << std::setfill('-') << std::right 
+                      << "| " << std::setw(15) << std::setfill(' ') << std::left << "Nama"
+                      << "| " << std::setw(15) << std::setfill(' ') << std::left << "Kode Mapel"
+                      << "| " << std::setw(7) << std::setfill(' ') << std::left << "Senin"
+                      << "| " << std::setw(7) << std::setfill(' ') << std::left << "Selasa"
+                      << "| " << std::setw(7) << std::setfill(' ') << std::left << "Rabu"
+                      << "| " << std::setw(7) << std::setfill(' ') << std::left << "Kamis"
+                      << "| " << std::setw(7) << std::setfill(' ') << std::left << "Jumat"
+                      << "| " << std::setw(7) << std::setfill(' ') << std::left << "kelas"
+                      << "| \n";
+            std::cout << "+" << std::setw(5) << std::setfill('-') << std::right
                       << "+" << std::setw(17) << std::setfill('-') << std::right
-                      << "+" << std::setw(17) << std::setfill('-') << std::right 
-                      << "+" << std::setw(9) << std::setfill('-') << std::right 
-                      << "+" << std::setw(9) << std::setfill('-') << std::right 
-                      << "+" << std::setw(9) << std::setfill('-') << std::right 
-                      << "+" << std::setw(9) << std::setfill('-') << std::right 
-                      << "+" << std::setw(9) << std::setfill('-') << std::right 
+                      << "+" << std::setw(17) << std::setfill('-') << std::right
+                      << "+" << std::setw(9) << std::setfill('-') << std::right
+                      << "+" << std::setw(9) << std::setfill('-') << std::right
+                      << "+" << std::setw(9) << std::setfill('-') << std::right
+                      << "+" << std::setw(9) << std::setfill('-') << std::right
+                      << "+" << std::setw(9) << std::setfill('-') << std::right
                       << "+" << std::setw(10) << std::setfill('-') << std::right << "+\n";
             Graph::printGraph(head);
-            
+            Graph::setUncolored(head);
+
             system("pause");
             system("cls");
             goto mainmenu;
@@ -155,7 +160,8 @@ int main()
             std::cout << "\nProgram Terminated..." << std::endl;
             break;
         default:
-            std::cout << "\nInput Invalid...\n" << std::endl;
+            std::cout << "\nInput Invalid...\n"
+                      << std::endl;
             system("pause");
             system("cls");
         }
