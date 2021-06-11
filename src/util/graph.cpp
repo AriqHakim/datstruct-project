@@ -115,16 +115,28 @@ namespace Graph
         if (isEmpty(head.adjacencyList))
             return nullptr;
 
-        pNode biggest = head.adjacencyList;
-        for_each(head.adjacencyList, [&biggest](const pNode &p)
-                 {
-                     if (p->totaledge > biggest->totaledge && !isColored(p))
-                     {
-                         biggest = p;
-                     }
-                 });
-
+        pNode biggest = nullptr;
+        pNode temp = head.adjacencyList;
+        while (isEmpty(biggest))
+        {
+            if (!isColored(temp))
+            {
+                biggest = temp;
+            }
+            temp = temp->next;
+        }
         return biggest;
+        // pNode biggest = createNode(Guru{"dummy", "dummy"});
+        // biggest->totaledge = -1;
+        // for_each(head.adjacencyList, [&biggest](const pNode &p)
+        //          {
+        //              if (p->totaledge > biggest->totaledge && !isColored(p))
+        //              {
+        //                  biggest = p;
+        //              }
+        //          });
+
+        // return biggest;
     }
 
     //untuk digunakan dalam welsh powell algorithm
@@ -178,34 +190,36 @@ namespace Graph
 
     graph colorIt(graph head, char Class)
     {
-        pNode biggest = searchBiggestNotColored(head);
-        biggest->status.kelas = Class;
-        biggest->status.colored = true;
-
-        pNode visited = nullptr;
-        visited = createNode(biggest->data);
-
-        pNode temp = head.adjacencyList;
-        while (!isEmpty(temp))
+        pNode listColored = nullptr;
+        pNode biggest = nullptr;
+        pNode p = head.adjacencyList;
+        while (!isEmpty(p))
         {
-            if (!inList(head, visited, temp) && !isColored(temp))
+            if (!isColored(p))
             {
-                temp->status.kelas = Class;
-                temp->status.colored = true;
-                insertFirst(visited, createNode(temp->data));
-            }
-            temp = temp->next;
-        }
-        deleteList(visited);
+                p->status.kelas = Class;
+                p->status.colored = true;
 
-        if (isGraphColored(head))
-        {
-            return head;
+                listColored = createNode(p->data);
+                pNode temp = p;
+                while (!isEmpty(temp))
+                {
+                    if (!inList(head, listColored, temp) && !isColored(temp))
+                    {
+                        temp->status.kelas = Class;
+                        temp->status.colored = true;
+                        insertFirst(listColored, createNode(temp->data));
+                    }
+                    temp = temp->next;
+                }
+
+                Class++;
+                deleteList(listColored);
+            }
+            p = p->next;
         }
-        else
-        {
-            return colorIt(head, ++Class);
-        }
+
+        return head;
     }
 
     void printGraph(graph head)
