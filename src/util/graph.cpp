@@ -17,6 +17,18 @@ namespace Graph
         return g;
     }
 
+    void deleteGraph(graph &head)
+    {
+        pNode it = head.adjacencyList;
+        while (it != nullptr)
+        {
+            pNode temp = it;
+            it = temp->next;
+            deleteList(temp->edge);
+            delete temp;
+        }
+    }
+
     void insertNode(graph &head, pNode pNew)
     {
         insertFirst(head.adjacencyList, pNew);
@@ -44,7 +56,7 @@ namespace Graph
         }
         else
         {
-            return;
+            std::cout << "Hari sudah pernah dipilih!\n";
         }
     }
 
@@ -91,16 +103,6 @@ namespace Graph
         return p->status.colored;
     }
 
-    bool isGraphColored(graph head)
-    {
-        for_each(head.adjacencyList, [](pNode &p)
-                 {
-                     if (!isColored(p))
-                         return false;
-                 });
-        return true;
-    }
-
     void setUncolored(graph &head)
     {
         for_each(head.adjacencyList, [](pNode &p)
@@ -108,35 +110,6 @@ namespace Graph
                      p->status.colored = false;
                      p->status.kelas = '0';
                  });
-    }
-
-    pNode searchBiggestNotColored(graph head)
-    {
-        if (isEmpty(head.adjacencyList))
-            return nullptr;
-
-        pNode biggest = nullptr;
-        pNode temp = head.adjacencyList;
-        while (isEmpty(biggest))
-        {
-            if (!isColored(temp))
-            {
-                biggest = temp;
-            }
-            temp = temp->next;
-        }
-        return biggest;
-        // pNode biggest = createNode(Guru{"dummy", "dummy"});
-        // biggest->totaledge = -1;
-        // for_each(head.adjacencyList, [&biggest](const pNode &p)
-        //          {
-        //              if (p->totaledge > biggest->totaledge && !isColored(p))
-        //              {
-        //                  biggest = p;
-        //              }
-        //          });
-
-        // return biggest;
     }
 
     //untuk digunakan dalam welsh powell algorithm
@@ -155,38 +128,6 @@ namespace Graph
         }
         return false;
     }
-
-    //Welsch-Powell algoorithm
-    // void colorIt(graph &head, char Class)
-    // {
-    //     pNode biggest = searchBiggestNotColored(head);
-    //     biggest->status.kelas = Class;
-    //     biggest->status.colored = true;
-
-    //     pNode visited = nullptr;
-    //     visited = createNode(biggest->data);
-
-    //     pNode temp = head.adjacencyList;
-    //     while (!isEmpty(temp))
-    //     {
-    //         if (!inList(head, visited, temp) && !isColored(temp))
-    //         {
-    //             temp->status.kelas = Class;
-    //             temp->status.colored = true;
-    //             insertFirst(visited, createNode(temp->data));
-    //         }
-    //         temp = temp->next;
-    //     }
-    //     deleteList(visited);
-    //     if (isGraphColored(head))
-    //     {
-    //         return;
-    //     }
-    //     else
-    //     {
-    //         colorIt(head, ++Class);
-    //     }
-    // }
 
     graph colorIt(graph head, char Class)
     {
@@ -252,7 +193,7 @@ namespace Graph
         }
         else
         {
-            std::cout << "Graph Kosong!\n";
+            std::cout << "Graph Kosong!\n\n";
         }
     }
 } // namespace graph

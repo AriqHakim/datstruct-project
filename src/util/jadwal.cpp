@@ -1,4 +1,3 @@
-// #pragma once
 #include "../model/guru.cpp"
 
 namespace Hari
@@ -52,6 +51,17 @@ namespace Hari
             insertDayFirst(head, createDayNode(Day{s}));
         }
         return head;
+    }
+
+    void deleteListHari(pDayNode &head)
+    {
+        while (head != nullptr)
+        {
+            pDayNode temp = head;
+            head = temp->next;
+            deleteList(temp->vertex);
+            delete temp;
+        }
     }
 
     pDayNode searchByHari(pDayNode head, std::string target)

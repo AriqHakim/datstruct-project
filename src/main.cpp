@@ -1,10 +1,12 @@
 #include "util/graph.cpp"
+#include <limits>
+
+void ignore_line();
 
 int main()
 {
     Hari::pDayNode jadwal = Hari::inisiasiHari();
     Graph::graph head = Graph::inisiasiGraph();
-    char initKelas = 'A';
     int menu;
     int count = 0;
     std::string nama;
@@ -17,17 +19,26 @@ int main()
     {
 
     mainmenu:
+        system("cls");
         std::cout << "Program Tabel Jadwal Guru" << std::endl;
 
         std::cout << "1. Input Jadwal\n2. Lihat Jadwal\n3. Exit\n"
                   << std::endl;
         std::cout << "Pilihan : ";
         std::cin >> menu;
+        if (std::cin.fail())
+        {
+            std::cin.clear();
+            ignore_line();
+            std::cout << "Input tidak boleh berupa string atau karakter!\n\n";
+            system("pause");
+            goto mainmenu;
+        }
 
         switch (menu)
         {
         case 1:
-
+        menu1:
             system("cls");
             count = count + 1;
             std::cout << "[Input Jadwal]\n\n";
@@ -37,6 +48,13 @@ int main()
             std::cin >> nama;
             std::cout << "Kode Mapel\t: ";
             std::cin >> kode;
+            if (!isEmpty(searchByKode(head.adjacencyList, kode)))
+            {
+                std::cout << "\nKode mapel tidak boleh sama\n";
+                system("pause");
+                count = count - 1;
+                goto menu1;
+            }
             std::cout << "\n";
             pNew = createNode(Guru{kode, nama});
             Graph::insertNode(head, pNew);
@@ -47,37 +65,40 @@ int main()
             std::cout << "1. Senin\n2. Selasa\n3. Rabu\n4. Kamis\n5. Jumat\n6. Kembali" << std::endl;
             std::cout << "Pilihan\t: ";
             std::cin >> day;
+            if (std::cin.fail())
+            {
+                std::cin.clear();
+                ignore_line();
+                std::cout << "Input tidak boleh berupa string atau karakter!\n\n";
+                system("pause");
+                goto balikmenu1;
+            }
             std::cout << "\n";
 
             switch (day)
             {
             case 1:
                 temp = Hari::searchByHari(jadwal, "Senin");
-                // Hari::addVertex(temp, pNew);
                 Graph::addEdge(head, pNew, temp);
                 Hari::setStatusSenin(pNew);
                 break;
             case 2:
                 temp = Hari::searchByHari(jadwal, "Selasa");
-                // Hari::addVertex(temp, pNew);
                 Graph::addEdge(head, pNew, temp);
                 Hari::setStatusSelasa(pNew);
                 break;
             case 3:
                 temp = Hari::searchByHari(jadwal, "Rabu");
-                // Hari::addVertex(temp, pNew);
                 Graph::addEdge(head, pNew, temp);
                 Hari::setStatusRabu(pNew);
                 break;
             case 4:
                 temp = Hari::searchByHari(jadwal, "Kamis");
-                // Hari::addVertex(temp, pNew);
                 Graph::addEdge(head, pNew, temp);
                 Hari::setStatusKamis(pNew);
                 break;
             case 5:
                 temp = Hari::searchByHari(jadwal, "Jumat");
-                // Hari::addVertex(temp, pNew);
                 Graph::addEdge(head, pNew, temp);
                 Hari::setStatusJumat(pNew);
                 break;
@@ -97,11 +118,11 @@ int main()
                 goto balikmenu1;
             }
         reconfirm:
-            std::cout << "Input hari/guru lain (y/n)\t: ";
+            std::cout << "Input hari lain (y/n)\t: ";
             std::cin >> confirm;
             if (confirm == 'n' || confirm == 'N')
             {
-                std::cout << "Kembali ke menu utama\n";
+                std::cout << "\nKembali ke menu utama\n";
                 system("pause");
                 system("cls");
                 goto mainmenu;
@@ -117,7 +138,7 @@ int main()
             break;
         case 2:
             Graph::sortGraph(head);
-            head = Graph::colorIt(head, initKelas);
+            head = Graph::colorIt(head, 'A');
             system("cls");
             std::cout << "[Lihat Jadwal]\n\n";
             std::cout << "[Tabel Jadwal]\n";
@@ -157,7 +178,8 @@ int main()
             goto mainmenu;
             break;
         case 3:
-            std::cout << "\nProgram Terminated..." << std::endl;
+
+            std::cout << "Program Terminated..." << std::endl;
             break;
         default:
             std::cout << "\nInput Invalid...\n"
@@ -166,4 +188,16 @@ int main()
             system("cls");
         }
     } while (menu < 1 || menu > 3);
+
+    delete pNew;
+    delete temp;
+    Hari::deleteListHari(jadwal);
+    Graph::deleteGraph(head);
+
+    return 0;
+}
+
+void ignore_line()
+{
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 }
