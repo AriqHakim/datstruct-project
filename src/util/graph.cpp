@@ -34,6 +34,7 @@ namespace Graph
         insertFirst(head.adjacencyList, pNew);
     }
 
+    //untuk menambah edge sesuai hari yang dipilih
     void addEdge(graph &head, pNode &pNew, Hari::pDayNode &hari)
     {
         pNode vertexList = hari->vertex;
@@ -60,6 +61,7 @@ namespace Graph
         }
     }
 
+    //menukar data node
     void swapData(pNode &a, pNode &b)
     {
         pNode temp = new Node;
@@ -112,23 +114,24 @@ namespace Graph
                  });
     }
 
-    //untuk digunakan dalam welsh powell algorithm
+    //Cek apakah node yang sedang diiterasi bertetangga dengan List node yang telah dikunjungi
     bool inList(graph head, pNode listVisited, pNode target)
     {
         pNode inGraph = nullptr;
         pNode edge = nullptr;
-        pNode temp = listVisited;
+        pNode temp = listVisited; //untuk iterasi list yang telah dikunjungi/diwarnai
         while (!isEmpty(temp))
         {
             inGraph = searchByKode(head.adjacencyList, temp->data.kode);
-            edge = searchByKode(inGraph->edge, target->data.kode);
-            if (!isEmpty(edge))
+            edge = searchByKode(inGraph->edge, target->data.kode);  //cari apakah temp bertetangga dengan node yang telah diwarnai
+            if (!isEmpty(edge))                                     //jika bertetangga return true    
                 return true;
             temp = temp->next;
         }
         return false;
     }
 
+    //welch-powell algorithm
     graph colorIt(graph head, char Class)
     {
         pNode listColored = nullptr;
@@ -136,19 +139,28 @@ namespace Graph
         pNode p = head.adjacencyList;
         while (!isEmpty(p))
         {
+            //cek Node apakah sudah diwarnai apa belum
             if (!isColored(p))
             {
+                //karena sudah di sort maka langsung diwarnai
                 p->status.kelas = Class;
                 p->status.colored = true;
 
+                //masukkan kedalam list yang sudah diwarnai
                 listColored = createNode(p->data);
+
+                //temp digunakan untuk iterasi node selanjutnya hingga akhir
                 pNode temp = p;
                 while (!isEmpty(temp))
                 {
+                    //cek apakah temp bertetangga dengan vertex yang telah diberi warna
+                    //jika tidak bertetangga dan belum diwarnai maka Node akan di warnai
                     if (!inList(head, listColored, temp) && !isColored(temp))
                     {
                         temp->status.kelas = Class;
                         temp->status.colored = true;
+
+                        //masukkan node ke list yang telah di warnai
                         insertFirst(listColored, createNode(temp->data));
                     }
                     temp = temp->next;
