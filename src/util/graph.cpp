@@ -43,7 +43,7 @@ namespace Graph
             while (temp != nullptr)
             {
                 pNode inGraph = searchByKode(head.adjacencyList, temp->data.kode);
-                if (isEmpty(searchByKode(pNew->edge, temp->data.kode)) && isEmpty(searchByKode(temp->edge, pNew->data.kode)))
+                if (isEmpty(searchByKode(pNew->edge, temp->data.kode)) && isEmpty(searchByKode(inGraph->edge, pNew->data.kode)))
                 {
                     insertFirst(pNew->edge, createNode(temp->data));
                     insertFirst(inGraph->edge, createNode(pNew->data));
